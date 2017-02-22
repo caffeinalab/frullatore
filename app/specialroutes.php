@@ -2,15 +2,11 @@
 
 return [
 
-	'intro' => [
-		'in' => 'special/intro.php',
+	'redirect' => [
+		'in' => 'special/redirect.php',
 		'out' => 'index.html',
-		'noJS' => true, // Do not include JS
-		'title' => SITE_TITLE . ' - Intro',
-		'metas' => [ 
-			'description' => _('meta_description') 
-		],
-		'data' => []
+		'title' => SITE_TITLE,
+		'data' => [ 'url' => '' ]
 	],
 
 	'4xx' => [

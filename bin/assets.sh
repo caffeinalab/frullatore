@@ -3,8 +3,8 @@
 assets_files="$(find "app/assets" -type f | grep -v '/\.')"
 bg_files="$(find "app/backgrounds" -type f | grep -v '/\.')"
 
-mkdir -p /tmp/caffeina-frullatore/assets
-mkdir -p /tmp/caffeina-frullatore/backgrounds
+mkdir -p tmp/res/assets
+mkdir -p tmp/res/backgrounds
 
 convert_opt="-strip -interlace Plane -filter Lanczos"
 
@@ -14,18 +14,18 @@ for f in $assets_files; do
 	ex="${bf##*.}"
 
 
-	if [ ! -f "/tmp/caffeina-frullatore/assets/$fn.$ex" ]; then
+	if [ ! -f "tmp/res/assets/$fn.$ex" ]; then
 		(
 		echo "Converting $bf"
 
-		convert $convert_opt "$f" "/tmp/caffeina-frullatore/assets/$fn.$ex"
+		convert $convert_opt "$f" "tmp/res/assets/$fn.$ex"
 
-		cp "/tmp/caffeina-frullatore/assets/$fn.$ex" "/tmp/caffeina-frullatore/assets/$fn-desktop@2x.$ex"
-		convert $convert_opt "$f" -adaptive-resize 50% "/tmp/caffeina-frullatore/assets/$fn-desktop.$ex"
+		cp "tmp/res/assets/$fn.$ex" "tmp/res/assets/$fn-desktop@2x.$ex"
+		convert $convert_opt "$f" -adaptive-resize 50% "tmp/res/assets/$fn-desktop.$ex"
 
-		convert $convert_opt "$f" -adaptive-resize 1200x\> "/tmp/caffeina-frullatore/assets/$fn-mobile@3x.$ex"
-		convert $convert_opt "$f" -adaptive-resize 800x\> "/tmp/caffeina-frullatore/assets/$fn-mobile@2x.$ex"
-		convert $convert_opt "$f" -adaptive-resize 400x\> "/tmp/caffeina-frullatore/assets/$fn-mobile.$ex"
+		convert $convert_opt "$f" -adaptive-resize 1200x\> "tmp/res/assets/$fn-mobile@3x.$ex"
+		convert $convert_opt "$f" -adaptive-resize 800x\> "tmp/res/assets/$fn-mobile@2x.$ex"
+		convert $convert_opt "$f" -adaptive-resize 400x\> "tmp/res/assets/$fn-mobile.$ex"
 
 		)
 	fi
@@ -36,11 +36,11 @@ for f in $bg_files; do
 	fn="${bf%.*}"
 	ex="${bf##*.}"
 
-	if [ ! -f "/tmp/caffeina-frullatore/backgrounds/$fn.$ex" ]; then
+	if [ ! -f "tmp/res/backgrounds/$fn.$ex" ]; then
 		(
 		echo "Converting $bf"
 
-		convert $convert_opt -quality 80% "$f" "/tmp/caffeina-frullatore/backgrounds/$fn.$ex"
+		convert $convert_opt -quality 80% "$f" "tmp/res/backgrounds/$fn.$ex"
 
 		)
 	fi

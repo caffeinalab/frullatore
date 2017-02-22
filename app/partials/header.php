@@ -48,7 +48,7 @@
 	</script>
 
 </head>
-<body class="<?= (!isset($_ROUTE['noJS'])) ? '-destruct' : '' ?>">
+<body>
 	
 	<!-- From this point, all will be AJAX-loaded -->
-	<!--AJAX-->
+	<!--AJAX--><div id="body">

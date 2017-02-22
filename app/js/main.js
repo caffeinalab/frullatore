@@ -11,7 +11,7 @@ window.$contentBody = $('#body');
 // Libs
 window._ = require('underscore');
 window.Q = require('q');
-
+window.Backbone = require('backbone');
 
 // Polyfills
 require('./poly/history');
@@ -35,11 +35,6 @@ if (IS_IEMOBILE && window.screen.deviceXDPI != null) {
 	window.DEVICE_PIXEL_RATIO = window.screen.deviceXDPI / window.screen.logicalXDPI;
 }
 
-// Protos
-Number.prototype.mod = function(n) {
-	return ((this%n)+n)%n;
-};
-
 // Global App
 require('./app');
 
@@ -47,23 +42,22 @@ require('./app');
 // Event App global //
 //////////////////////
 
-App.Router.on('willbeloaded', function() {
+App.Router.on('willbeloaded', () => {
 });
 
-App.Router.on('loaded', function() {
+App.Router.on('loaded', () => {
 });
 
-App.Router.on('executed', function() {
+App.Router.on('executed', () => {
 });
 
-App.Router.on('pushstate', function() {
+App.Router.on('pushstate', () => {
 	if (window.ga != null) {
 		ga('send','pageview', location.pathname);
 		ga('alternate.send','pageview', location.pathname);
 	}
 });
 
-$window.load(function() {
-	App.Router.init();
+$window.load(() => {
 	$html.removeClass('-loading');
 });

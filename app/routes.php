@@ -2,7 +2,7 @@
 
 return [
 
-	'homepage' => [
+	'' => [
 		'in' => 'home.php',
 		'out' => 'index.html',
 		'scriptName' => 'scripts/home.js',

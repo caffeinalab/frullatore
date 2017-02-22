@@ -41,7 +41,7 @@ exports.bindEvents = function() {
 	if (eventsBinded) return;
 	eventsBinded = true;
 
-	$body.on('click', '[data-href]', function(e) {
+	$body.on('click', '[data-route]', function(e) {
 		var $t = $(this);
 
 		if (!$t.data('noantibounce')) {
@@ -49,7 +49,7 @@ exports.bindEvents = function() {
 			$t.data('disabled', true);
 		}
 
-		App.Router.loadRouteByKey($t.data('href'), {
+		App.Router.loadRouteByKey($t.data('route'), {
 			reload: !!$t.data('reload')
 		});
 	});

@@ -10,7 +10,7 @@ define('PROJECT_NAME', 'Frullatore');
 define('ENV', $argv[1]);
 define('CDN_URL', '');
 define('API_BUCKET', '');
-define('SITE_TITLE', 'Frullatore');
+define('SITE_TITLE', PROJECT_NAME);
 define('API_ENDPOINT', '');
 
 if (ENV == "dev") {

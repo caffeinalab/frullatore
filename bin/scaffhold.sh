@@ -10,4 +10,4 @@ echo "Copying public..."
 cp -Rf app/public/ build
 
 echo "Copying resources..."
-cp -Rf /tmp/caffeina-frullatore/ build
+cp -Rf tmp/res/ build

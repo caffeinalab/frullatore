@@ -1,6 +1,5 @@
 <?php global $_ROUTE; ?>
-</div>
-<!--/AJAX-->
+</div><!--/AJAX-->
 <!-- After this point, all HTML will be ignored by AJAX -->
 
 <?php if (!isset($_ROUTE['noJS'])) : ?>

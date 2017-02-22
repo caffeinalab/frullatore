@@ -44,7 +44,16 @@ exports.loadPage = function(url, force) {
 	console.log('App: Loading page', url);
 
 	var routeObj = exports.getRouteFromUrl(url);
+	if (routeObj == null) {
+		console.error('App: unable to find the route from URL', url);
+		return;
+	}
+
 	var pageUrl = exports.getPageUrlFromRoute(routeObj);
+	if (pageUrl == null) {
+		console.error('App: unable to find the page from route', routeObj);
+		return;
+	}
 
 	exports.pushState(routeObj, pageUrl);
 
@@ -62,11 +71,15 @@ exports.loadRouteByKey = function(k, opt) {
 
 	var routeObj = ROUTES[k];
 	if (routeObj == null) {
-		console.error('App: unable to find the route', routeObj);
+		console.error('App: unable to find the route from key', k);
 		return;
 	}
 	
 	var pageUrl = exports.getPageUrlFromRoute(routeObj);
+	if (pageUrl == null) {
+		console.error('App: unable to find the page from route', routeObj);
+		return;
+	}
 
 	if (opt.reload) {
 		exports.loadRoute(routeObj, opt);
@@ -80,13 +93,16 @@ exports.loadRoute = function(routeObj, opt, callback) {
 	exports.currentRoute = routeObj;
 
 	opt = _.defaults(opt || {}, {
-		time: 1000,
+		time: 0,
 		reload: false
 	});
 
-	App.UI.trigger('willdestroy');
-
 	var pageUrl = exports.getPageUrlFromRoute(routeObj);
+	if (pageUrl == null) {
+		console.error('App: unable to find the page from route', routeObj);
+		return;
+	}
+
 	exports.trigger('willbeloaded');
 
 	if (opt.reload) {
@@ -104,16 +120,12 @@ exports.loadRoute = function(routeObj, opt, callback) {
 				var ajaxResponse = page.split('<!--AJAX-->')[1].split('<!--/AJAX-->')[0];
 				setTimeout(function() {
 					App.UI.trigger('destroy');
-
 					App.UI.off();
-					App.UI.disableMove = false;
 
 					asyncInnerHTML(ajaxResponse, function(f) {
 						$contentBody.empty();
 						$contentBody[0].appendChild( f );
 						exports.trigger('loaded');
-
-						App.UI.calcStyle();
 
 						if (routeObj.scriptName) {
 							$.ajax({
@@ -125,7 +137,7 @@ exports.loadRoute = function(routeObj, opt, callback) {
 								exports.trigger('executed');
 							})
 							.fail(function(jqxhr, settings, exception) {
-								console.error(exception);
+								console.error('Error in loading script', exception);
 							});
 						} else {
 							exports.trigger('executed');
@@ -135,15 +147,12 @@ exports.loadRoute = function(routeObj, opt, callback) {
 
 				}, opt.time);
 			},
-			error: function() {
-				console.error('App: Error in loadRoute', err);
+			error: function(jqxhr, settings, exception) {
+				console.error('App: Error in loadRoute', exception);
 			}
 		});
 	}
 };
 
-exports.init = function() {
-	exports.hash = location.hash;
-	exports.loadPage(location.pathname, true);
-	initLocationManager();
-};
+initLocationManager();
+exports.loadPage(location.pathname, true);
