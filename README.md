@@ -1,4 +1,4 @@
-## Frullatore
+# Frullatore
 
 Frullatore is a PHP build system that staticize all files in pure HTML with i18n support.
 
@@ -13,6 +13,12 @@ Frullatore is a PHP build system that staticize all files in pure HTML with i18n
 
 Clone this repository. 
 Change your project name in the following files: *package.json*, *config.php*.
+
+Then run:
+
+```
+./install.sh
+```
 
 ### Optimizations
 
