@@ -1,0 +1,33 @@
+{
+  "name": "frullatore",
+  "version": "1.0.0",
+  "scripts": {
+    "clean": "rm -rf build",
+    "assets": "bin/assets.sh",
+    "predev": "npm run clean && bin/scaffhold.sh",
+    "dev": "bin/dev-builder.sh & bin/dev-scripts.sh & bin/dev-styles.sh & bin/dev-server.sh &",
+    "postdev": "livereload build",
+    "preprod": "npm run clean && bin/scaffhold.sh",
+    "prod": "bin/builder.sh prod && bin/scripts.sh && bin/styles.sh",
+    "postprod": "bin/deploy.sh prod",
+    "prestage": "npm run clean && bin/scaffhold.sh",
+    "stage": "bin/builder.sh stage && bin/scripts.sh && bin/styles.sh",
+    "poststage": "bin/deploy.sh stage"
+  },
+  "devDependencies": {
+    "browserify": "^13.0.0",
+    "csso": "^1.8.0",
+    "less": "^2.6.1",
+    "less-watch-compiler": "^1.2.2",
+    "livereload": "^0.4.1",
+    "minimize": "^1.8.1",
+    "uglify-js": "^2.6.2",
+    "watch": "^0.17.1",
+    "watchify": "^3.7.0"
+  },
+  "dependencies": {
+    "jquery": "^2.2.1",
+    "q": "^1.4.1",
+    "underscore": "^1.8.3"
+  }
+}
