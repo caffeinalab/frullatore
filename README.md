@@ -17,7 +17,7 @@ Change your project name in the following files: *package.json*, *config.php*.
 Then run:
 
 ```
-./install.sh
+./installer.sh
 ```
 
 ### Optimizations
